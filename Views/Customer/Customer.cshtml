@@ -1,0 +1,59 @@
+﻿<div class="container ">
+    <h1>Add Customer</h1>
+
+    <form asp-action="AddCustomer" method="post">
+
+        <div class="row">
+
+          <div class="col-3">
+            <label for="fname">First Name</label>
+          </div>
+
+          <div class="col-3">
+                <input type="text" name="FirstName" placeholder="First Name" />
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <label for="lname">Last Name</label>
+          </div>
+          <div class="col-3">
+                <input type="text" name="LastName" placeholder="Last Name" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <label for="email">Email</label>
+            </div>
+            <div class="col-3">
+                <input type="email" name="Email" placeholder="Email" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <label for="phonenum">Phone Number</label>
+            </div>
+            <div class="col-3">
+                <input type="text" name="PhoneNumber" placeholder="Phone Number" />
+            </div>
+        </div>            
+
+        <button type="submit" style="width:200px">Add Customer</button>
+
+    </form>
+    <br />
+
+    <div class="row">
+        <div class="col">
+            <form asp-action="UploadContract" method="post" enctype="multipart/form-data">
+                <input id="fileInput" type="file" name="file" />
+                <button type="submit">Upload Contract</button>
+            </form>
+        </div>
+    </div>
+
+</div>
