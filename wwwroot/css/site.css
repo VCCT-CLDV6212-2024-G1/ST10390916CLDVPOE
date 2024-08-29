@@ -17,19 +17,30 @@ html {
     min-height: 100%;
 }
 
+nav {
+    background-color: #F3A400;
+    color: #302A40;
+    border-bottom: 2px solid #302A40;
+    font-weight:500;
+}
+
 body {
     margin-bottom: 60px;
-    background-color:
+    background-color: floralwhite;
+    color: #302A40;
 }
 
 footer {
-    background-color: burlywood;
+    background-color: #D11547;
+    color: #302A40;
+    border-top: 2px solid #302A40;
+    font-weight:600;
 }
 
 button {
     border-radius: 5px;
     border: 1.5px solid;
-    color: black;
+    color: #302A40;
     background-color: transparent;
     height: 32px;
     font-weight: 600;
@@ -38,30 +49,34 @@ button {
 }
 
 input {
-    border-radius: 5px;
     background-color: transparent;
-
 }
+
+    input:focus {
+        background-color: white;
+    }
 
 input[type="text"], input[type="email"], input[type="number"] {
     border: 1.5px solid;
-    color: black;
+    border-radius: 5px;
+    color: #302A40;
     height: 32px;
     padding-left: 0.5em;
 }
 
 fileInput {
     border: 1.5px solid;
-    color: black;
+    color: #302A40;
 }
 
 div[class="row"] {
-    margin:10px;
+    margin: 10px;
 }
 
 button:hover {
     color: white;
-    background-color: darkslategrey;
+    border: hidden;
+    background-color: #302A40;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(1px);
 }
@@ -71,3 +86,7 @@ button:active {
     transform: translateY(0);
 }
 
+a[class="navbar-brand"] {
+    color: #302A40;
+    font-weight:600;
+}
