@@ -1,3 +1,6 @@
+/*Used w3schools for css modifications*/
+/*https://www.w3schools.com/css/ */
+
 html {
     font-size: 14px;
 }
@@ -52,9 +55,9 @@ input {
     background-color: transparent;
 }
 
-    input:focus {
-        background-color: white;
-    }
+input:focus {
+    background-color: white;
+}
 
 input[type="text"], input[type="email"], input[type="number"] {
     border: 1.5px solid;
