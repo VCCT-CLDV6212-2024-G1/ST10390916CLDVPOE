@@ -53,8 +53,9 @@
 
     <div class="row">
         <div class="col">
-            <form asp-action="UploadContract" method="post" enctype="multipart/form-data">
-                <input id="fileInput" type="file" name="file" required/>
+            <form asp-action="UploadContract" method="post" >
+                <input id="fileInput" type="file" name="file"  required/>
+                
                 <button type="submit">Upload Contract</button>
             </form>
         </div>
