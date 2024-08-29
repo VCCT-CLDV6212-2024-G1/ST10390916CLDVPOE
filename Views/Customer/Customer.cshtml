@@ -1,4 +1,8 @@
-﻿<div class="container ">
+﻿@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="container ">
     <h1>Add Customer</h1>
 
     <form asp-action="AddCustomer" method="post">
@@ -10,7 +14,7 @@
           </div>
 
           <div class="col-3">
-                <input type="text" name="FirstName" placeholder="First Name" />
+                <input type="text" name="FirstName" placeholder="First Name" required/>
           </div>
 
         </div>
@@ -20,7 +24,7 @@
             <label for="lname">Last Name</label>
           </div>
           <div class="col-3">
-                <input type="text" name="LastName" placeholder="Last Name" />
+                <input type="text" name="LastName" placeholder="Last Name" required/>
             </div>
         </div>
 
@@ -29,7 +33,7 @@
                 <label for="email">Email</label>
             </div>
             <div class="col-3">
-                <input type="email" name="Email" placeholder="Email" />
+                <input type="email" name="Email" placeholder="Email" required />
             </div>
         </div>
 
@@ -38,7 +42,7 @@
                 <label for="phonenum">Phone Number</label>
             </div>
             <div class="col-3">
-                <input type="text" name="PhoneNumber" placeholder="Phone Number" />
+                <input type="text" name="PhoneNumber" placeholder="Phone Number" required />
             </div>
         </div>            
 
@@ -50,7 +54,7 @@
     <div class="row">
         <div class="col">
             <form asp-action="UploadContract" method="post" enctype="multipart/form-data">
-                <input id="fileInput" type="file" name="file" />
+                <input id="fileInput" type="file" name="file" required/>
                 <button type="submit">Upload Contract</button>
             </form>
         </div>

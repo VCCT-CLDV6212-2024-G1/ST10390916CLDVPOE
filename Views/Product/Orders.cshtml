@@ -1,7 +1,10 @@
-﻿<h1>Process an order</h1>
+﻿@{
+    ViewData["Title"] = "Orders";
+}
 
+<h1>Process an order</h1>
 
 <form asp-action="ProcessOrder" method="post">
-    <input type="text" name="orderId" placeholder="Order ID" />
+    <input type="text" name="orderId" placeholder="Order ID" required />
     <button type="submit">Process Order</button>
 </form>
