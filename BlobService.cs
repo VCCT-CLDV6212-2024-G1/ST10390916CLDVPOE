@@ -1,25 +1,19 @@
-﻿using Azure.Storage.Blobs;
-
-namespace ST10390916CLDVPOE
+﻿namespace ST10390916CLDVPOE
 {
     public class BlobService
     {
-        //used to access data in blob
-        private readonly BlobServiceClient _blobServiceClient;
-
-        public BlobService(IConfiguration configuration)
-        {
-            _blobServiceClient = new BlobServiceClient(configuration["AzureStorage:ConnectionString"]);
-        }
-
-        //upload data to "images" blob container using stream
         public async Task UploadBlobAsync(string containerName, string blobName, Stream content)
         {
-            var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            await containerClient.CreateIfNotExistsAsync();
-            var blobClient = containerClient.GetBlobClient(blobName);
-            await blobClient.UploadAsync(content, true);
+            var client = new HttpClient();
+            string url = "https://st10390916function.azurewebsites.net/api/UploadBlob?" +
+                "code=ytHJfD3JBoUcTdfHRIM-dqDS-vvi2oTT9nUvtaB2JFi1AzFuz16Xfg%3D%3D" + $"&containerName={containerName}&blobName={blobName}";
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            StreamContent streamcontent = new StreamContent(content);
+            request.Content = streamcontent;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            System.Diagnostics.Debug.WriteLine(await response.Content.ReadAsStringAsync());
+            System.Diagnostics.Debug.WriteLine(response.StatusCode);
         }
-
     }
 }

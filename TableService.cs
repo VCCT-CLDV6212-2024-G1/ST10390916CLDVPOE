@@ -5,35 +5,32 @@ namespace ST10390916CLDVPOE
 {
     public class TableService
     {
-        //used to access Azure table
-        private readonly TableClient _tableCustomers;
-        private readonly TableClient _tableProducts;
-
-        //connect to table
-        public TableService(IConfiguration configuration)
-        {
-            //define the type of connection string
-            var connectionString = configuration["AzureStorage:ConnectionString"];
-            var serviceClient = new TableServiceClient(connectionString);
-
-            _tableCustomers = serviceClient.GetTableClient("customers");
-            _tableCustomers.CreateIfNotExists();
-
-            _tableProducts = serviceClient.GetTableClient("products");
-            _tableProducts.CreateIfNotExists();
-
-        }
-
         //add customer to table
         public async Task AddEntityAsync(Customer customer)
         {
-            await _tableCustomers.AddEntityAsync(customer);
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"https://st10390916function.azurewebsites.net/api/UploadCustomer?" +
+                $"code=dpiadHLR9_DYyLTaJdc6QbnY9xUs95ipadsbk7FPR_orAzFud0qENA%3D%3D&tableName=customers" +
+                $"&partitionKey={customer.PartitionKey}&rowKey={customer.RowKey}&data={customer}" +
+                $"&firstName={customer.FirstName}&lastName={customer.LastName}&phoneNumber={customer.PhoneNumber}&email={customer.Email}");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            System.Diagnostics.Debug.WriteLine(await response.Content.ReadAsStringAsync());
+            System.Diagnostics.Debug.WriteLine(response.StatusCode);
         }
 
         //add product to table
         public async Task AddEntityAsync(Product product)
         {
-            await _tableProducts.AddEntityAsync(product);
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"https://st10390916function.azurewebsites.net/api/UploadProduct?" +
+                $"code=sT3mfhPxFzBLFeOu8AazVAVvpnO1dJiYWzkFw0x55UqOAzFuwPVPmg%3D%3D&tableName=products&partitionKey={product.PartitionKey}" +
+                $"&rowKey={product.RowKey}&data={product}&productName={product.ProductName}&productCode={product.ProductCode}" +
+                $"&price={product.Price}&productWeight={product.ProductWeight}");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            System.Diagnostics.Debug.WriteLine(await response.Content.ReadAsStringAsync());
+            System.Diagnostics.Debug.WriteLine(response.StatusCode);
         }
 
     }

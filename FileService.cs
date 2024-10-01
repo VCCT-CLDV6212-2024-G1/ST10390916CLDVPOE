@@ -1,27 +1,23 @@
-﻿using Azure.Storage.Files.Shares;
+﻿using Azure;
+using Azure.Storage.Files.Shares;
+using System.Net.Http.Headers;
 
 namespace ST10390916CLDVPOE
 {
     public class FileService
     {
-        //used to access file share client
-        private readonly ShareServiceClient _shareServiceClient;
-
-        public FileService(IConfiguration configuration)
-        {
-            _shareServiceClient = new ShareServiceClient(configuration["AzureStorage:ConnectionString"]);
-        }
-
-        //upload data to "contracts" file share using stream
         public async Task UploadFileAsync(string shareName, string fileName, Stream content)
         {
-            var shareClient = _shareServiceClient.GetShareClient(shareName);
-            await shareClient.CreateIfNotExistsAsync();
-            var directoryClient = shareClient.GetRootDirectoryClient();
-            var fileClient = directoryClient.GetFileClient(fileName);
-            await fileClient.CreateAsync(content.Length);
-            await fileClient.UploadAsync(content);
+            var client = new HttpClient();
+            string url = "https://st10390916function.azurewebsites.net/api/UploadFile?code=2fpQeXmGvCpTRwnNxKjyNjbxKVZY99IcLL0A9wVvaBTTAzFug9CJ8Q%3D%3D" + $"&shareName={shareName}&fileName={fileName}";
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            StreamContent streamcontent = new StreamContent(content);
+            streamcontent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.MimeUtility.GetMimeMapping(fileName));
+            request.Content = streamcontent;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            System.Diagnostics.Debug.WriteLine(await response.Content.ReadAsStringAsync());
+            System.Diagnostics.Debug.WriteLine(response.StatusCode);
         }
-
     }
 }
