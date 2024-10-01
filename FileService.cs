@@ -9,7 +9,8 @@ namespace ST10390916CLDVPOE
         public async Task UploadFileAsync(string shareName, string fileName, Stream content)
         {
             var client = new HttpClient();
-            string url = "https://st10390916function.azurewebsites.net/api/UploadFile?code=2fpQeXmGvCpTRwnNxKjyNjbxKVZY99IcLL0A9wVvaBTTAzFug9CJ8Q%3D%3D" + $"&shareName={shareName}&fileName={fileName}";
+            string url = $"https://st10390916function.azurewebsites.net/api/UploadFile?" +
+                $"code=2fpQeXmGvCpTRwnNxKjyNjbxKVZY99IcLL0A9wVvaBTTAzFug9CJ8Q%3D%3D&shareName={shareName}&fileName={fileName}";
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             StreamContent streamcontent = new StreamContent(content);
             streamcontent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.MimeUtility.GetMimeMapping(fileName));
