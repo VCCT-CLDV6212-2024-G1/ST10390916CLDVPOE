@@ -5,12 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Custom services
-builder.Services.AddSingleton<BlobService>();
-builder.Services.AddSingleton<TableService>();
-builder.Services.AddSingleton<QueueService>();
-builder.Services.AddSingleton<FileService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
